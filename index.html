@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coopa Ebirra | International Digital Finance</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #d4af37;
+            --navy: #0a192f;
+            --slate: #112240;
+            --text-silver: #ccd6f6;
+            --emerald: #64ffda;
+            --white: #ffffff;
+            --glass-bg: rgba(17, 34, 64, 0.7);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+
+        body {
+            background-color: var(--navy);
+            color: var(--text-silver);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 8%;
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0; z-index: 1000;
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .brand {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .brand span { color: var(--gold); }
+
+        .nav-links { display: flex; list-style: none; gap: 2.5rem; }
+        .nav-links a { text-decoration: none; color: var(--text-silver); font-weight: 400; transition: 0.3s; cursor: pointer;}
+        .nav-links a:hover { color: var(--gold); }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at center, #112240 0%, #0a192f 100%);
+            padding: 0 10%;
+        }
+
+        .hero h1 { font-size: clamp(2.5rem, 8vw, 5rem); color: var(--white); line-height: 1.1; margin-bottom: 20px; }
+        .hero p { max-width: 600px; font-size: 1.2rem; color: #8892b0; margin-bottom: 40px; }
+
+        /* --- LOAN CALCULATOR ENGINE --- */
+        .calc-section {
+            padding: 100px 10%;
+            background: var(--white);
+            color: var(--navy);
+        }
+
+        .calc-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .input-group { margin-bottom: 25px; }
+        label { display: block; font-weight: 600; margin-bottom: 10px; }
+        input[type="range"] { width: 100%; accent-color: var(--navy); cursor: pointer; }
+        
+        .result-box {
+            background: var(--navy);
+            color: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .result-box h2 { font-size: 3rem; color: var(--gold); }
+
+        /* --- INTERNATIONAL SERVICES GRID --- */
+        .services { padding: 100px 10%; }
+        .section-title { text-align: center; margin-bottom: 60px; }
+        .section-title h2 { font-size: 2.5rem; color: var(--white); }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--slate);
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid transparent;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .card:hover { border-color: var(--gold); transform: translateY(-10px); }
+        .card h3 { color: var(--gold); margin-bottom: 15px; }
+
+        /* --- GLOBAL APPLICATION FORM --- */
+        #apply {
+            padding: 100px 10%;
+            background: var(--slate);
+        }
+
+        .form-glass {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--glass-bg);
+            padding: 50px;
+            border-radius: 25px;
+            border: 1px solid var(--border);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .cta-btn {
+            background: var(--gold);
+            color: var(--navy);
+            padding: 18px 40px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 800;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .cta-btn:hover { background: var(--white); transform: scale(1.05); }
+
+        footer {
+            padding: 50px 10%;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            color: #444;
+        }
+
+        /* --- MOBILE RESPONSIVENESS --- */
+        @media (max-width: 768px) {
+            .calc-container, .form-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="brand">COOPA <span>EBIRRA</span></div>
+        <ul class="nav-links">
+            <li><a href="#home">Global Home</a></li>
+            <li><a href="#calc">Loan Engine</a></li>
+            <li><a href="#services">Capital Markets</a></li>
+            <li><a href="#apply">Apply Now</a></li>
+        </ul>
+        <select id="currency" onchange="updateCurrency()" style="width: auto; margin: 0; padding: 5px 10px;">
+            <option value="USD">USD ($)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="GBP">GBP (£)</option>
+        </select>
+    </nav>
+
+    <section id="home" class="hero">
+        <h1>Global Finance <br> Without Borders.</h1>
+        <p>Empowering international trade and personal growth through the "Coopa Ebirra" liquidity network. Fast approvals, zero hidden fees.</p>
+        <button class="cta-btn" onclick="window.location.href='#calc'">Check Eligibility</button>
+    </section>
+
+    <section id="calc" class="calc-section">
+        <div class="section-title">
+            <h2 style="color: var(--navy)">Loan Calculation Engine</h2>
+            <p>Adjust the sliders to view your projected monthly repayment.</p>
+        </div>
+        
+        <div class="calc-container">
+            <div class="inputs">
+                <div class="input-group">
+                    <label>Loan Amount: <span id="amt-val">$10,000</span></label>
+                    <input type="range" id="amount" min="1000" max="100000" step="500" value="10000" oninput="calculateLoan()">
+                </div>
+                <div class="input-group">
+                    <label>Duration: <span id="dur-val">12 Months</span></label>
+                    <input type="range" id="duration" min="6" max="60" step="6" value="12" oninput="calculateLoan()">
+                </div>
+                <p>Interest Rate (Fixed): <strong>5.5%</strong></p>
+            </div>
+            <div class="result-box">
+                <p>Monthly Repayment</p>
+                <h2 id="monthly-repayment">$858.37</h2>
+                <small>Subject to credit assessment</small>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="section-title">
+            <h2>Our International Portfolios</h2>
+        </div>
+        <div class="grid">
+            <div class="card">
+                <h3>Venture Capital</h3>
+                <p>Funding for tech startups across emerging markets with 0% origination fees.</p>
+            </div>
+            <div class="card">
+                <h3>Personal Liquidity</h3>
+                <p>Instant personal loans for global citizens, processed in under 24 hours.</p>
+            </div>
+            <div class="card">
+                <h3>Trade Financing</h3>
+                <p>Supporting import/export businesses with competitive interest rates and insurance.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="apply">
+        <div class="form-glass">
+            <h2 style="margin-bottom: 30px; text-align: center;">International Application Portal</h2>
+            <form onsubmit="submitApplication(event)">
+                <div class="form-grid">
+                    <input type="text" placeholder="Full Legal Name" required>
+                    <input type="email" placeholder="Business Email" required>
+                    <input type="text" placeholder="Country of Residence" required>
+                    <select>
+                        <option>Loan Purpose: Business Expansion</option>
+                        <option>Loan Purpose: Personal / Medical</option>
+                        <option>Loan Purpose: Real Estate</option>
+                    </select>
+                </div>
+                <textarea rows="4" placeholder="Briefly describe your funding requirements..."></textarea>
+                <button type="submit" class="cta-btn" style="width: 100%;">Submit Formal Request</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Coopa Ebirra International Banking Corp. All Rights Reserved.</p>
+        <p style="font-size: 0.8rem; margin-top: 10px;">Licensed by Global Financial Authority #8829-X</p>
+    </footer>
+
+    <script>
+        // LOAN CALCULATOR LOGIC
+        function calculateLoan() {
+            const amount = document.getElementById('amount').value;
+            const duration = document.getElementById('duration').value;
+            const rate = 0.055 / 12; // 5.5% annual interest
+
+            document.getElementById('amt-val').innerText = `$${Number(amount).toLocaleString()}`;
+            document.getElementById('dur-val').innerText = `${duration} Months`;
+
+            // Formula: [P x R x (1+R)^N] / [(1+R)^N - 1]
+            const x = Math.pow(1 + rate, duration);
+            const monthly = (amount * x * rate) / (x - 1);
+
+            document.getElementById('monthly-repayment').innerText = `$${monthly.toFixed(2)}`;
+        }
+
+        // CURRENCY SWITCHER (Simulation)
+        function updateCurrency() {
+            const curr = document.getElementById('currency').value;
+            alert(`Coopa Ebirra systems switching to ${curr} localized rates...`);
+            // In a real app, this would update all labels on the page
+        }
+
+        // FORM SUBMISSION
+        function submitApplication(e) {
+            e.preventDefault();
+            alert("Application Encrypted & Sent! A Coopa Ebirra representative will contact you shortly.");
+        }
+
+        // Initialize Calc
+        calculateLoan();
+    </script>
+</body>
+</html>
